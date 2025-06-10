@@ -10,7 +10,7 @@ import Favorites from '../Main Pages/favourite';
 import Navbar from '../Components/navbar';
 
 const App = () => {
-  const isAuthenticated = true; // Replace with real auth check
+  const isAuthenticated = false; // Replace with real auth check
 
   return (
     <Router>
