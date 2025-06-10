@@ -1,0 +1,62 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Register = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError('The password does not match');
+      return;
+    }
+    // Replace with API call
+    navigate('/login');
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-2xl">
+        <h2 className="text-2xl font-bold text-center mb-4 text-pink-500">Register</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <input name="firstName" placeholder="First name" onChange={handleChange} className="border p-2 rounded" />
+          <input name="lastName" placeholder="Last name" onChange={handleChange} className="border p-2 rounded" />
+          <input name="email" placeholder="Email" onChange={handleChange} className="border p-2 rounded" />
+          <input name="phone" placeholder="Phone number" onChange={handleChange} className="border p-2 rounded" />
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} className="border p-2 rounded" />
+          <div>
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              onChange={handleChange}
+              className="border p-2 rounded w-full"
+            />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          </div>
+        </div>
+        <button type="submit" className="bg-pink-500 text-white py-2 px-4 rounded w-full mt-4">
+          Create Account
+        </button>
+        <p className="text-sm text-center mt-4">
+          Already have an account? <a href="/login" className="text-pink-500">Login</a>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Register;

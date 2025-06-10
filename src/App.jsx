@@ -1,31 +1,30 @@
-import { useState } from 'react'
-import './App.css'
-import { Toaster } from 'react-hot-toast'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import LoginPage from '../pages/loginPage'
-import RegisterPage from '../pages/registerPage'
-import HomePage from '../pages/homePage'
-import FavouritePage from '../pages/favouritePage'
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Login from '../Auth Pages/login';
+import Register from '../Auth Pages/register';
+import Home from '../Main Pages/home';
+import Dashboard from '../Main Pages/dashBoard';
+import Favorites from '../Main Pages/favourite';
+import Navbar from '../Components/navbar';
+
+const App = () => {
+  const isAuthenticated = true; // Replace with real auth check
 
   return (
-       <BrowserRouter>
-    <Toaster position='top-right'/>
-     <Routes path="/*">
-       
-       <Route path="/login" element={<LoginPage/>}/>
-       <Route path= "/register" element={<RegisterPage/>}/>
-        <Route path= "/home" element={<HomePage/>}/>
-        <Route path="/favourite" element={<FavouritePage />} />
+    <Router>
+      {isAuthenticated && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/favorites" element={isAuthenticated ? <Favorites /> : <Navigate to="/login" />} />
+      </Routes>
+    </Router>
+  );
+};
 
-      
-      
-
-     </Routes> 
-    </BrowserRouter>
-  )
-}
-
-export default App
+export default App;
