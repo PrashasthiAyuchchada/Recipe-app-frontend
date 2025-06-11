@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import RecipeList from '../components/RecipeList';
+import RecipeList from '../Components/RecipeList';
 import CategorySelector from '../Components/categorySelecter';
 import RecipeModal from '../Components/recipeModel';
 import axios from 'axios';
