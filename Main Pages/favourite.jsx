@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RecipeModal from '../Components/recipeModel';
-import RecipeCard from '../components/RecipeCard';
+import RecipeCard from '../Components/Recipecard';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);

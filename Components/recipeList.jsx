@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeCard from './RecipeCard';
+import RecipeCard from './Recipecard';
 
 const RecipeList = ({ recipes, favorites, onFavoriteToggle, onOpen }) => {
   return (
