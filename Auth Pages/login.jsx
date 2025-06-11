@@ -31,7 +31,8 @@ const Login = ({ setIsAuthenticated }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4 text-pink-500">Login</h2>
+        <h1 className="text-3xl font-bold text-center mb-4 text-pink-500">cook</h1>
+        <h2 className="text-2xl font-bold text-left mb-4">Login</h2>
         <input
           type="email"
           placeholder="Email address"

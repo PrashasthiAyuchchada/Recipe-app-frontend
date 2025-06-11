@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center px-6 h-20 bg-white shadow-md relative">
       {/* Left - Logo */}
-      <div className="text-pink-500 text-2xl font-bold">coek</div>
+      <div className="text-pink-500 text-3xl font-bold">cook</div>
 
       {/* Center - Navigation Links */}
       <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-10 items-center">

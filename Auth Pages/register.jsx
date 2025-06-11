@@ -48,8 +48,9 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-2xl">
-        <h2 className="text-2xl font-bold text-center mb-4 text-pink-500">Register</h2>
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full h-[500px] max-w-2xl">
+        <h1 className="text-3xl font-bold text-center mb-4 text-pink-500">cook</h1>
+        <h2 className="text-2xl font-bold text-left mb-4">Register</h2>
         <div className="grid grid-cols-2 gap-4">
           <input name="firstName" placeholder="First name" onChange={handleChange} className="border p-2 rounded" />
           <input name="lastName" placeholder="Last name" onChange={handleChange} className="border p-2 rounded" />
@@ -67,7 +68,7 @@ const handleSubmit = async (e) => {
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
         </div>
-        <button type="submit" className="bg-pink-500 text-white py-2 px-4 rounded w-full mt-4">
+        <button type="submit" className="bg-pink-500 text-white py-2 px-4 rounded w-[200px] mt-4 ">
           Create Account
         </button>
         <p className="text-sm text-center mt-4">
