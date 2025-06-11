@@ -11,7 +11,7 @@ const Favorites = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/recipes/favorites', {
+        const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/api/recipes/favorites", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setFavorites(res.data);
@@ -24,7 +24,7 @@ const Favorites = () => {
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/recipes/favorites/${id}`, {
+      await axios.delete(import.meta.env.VITE_BACKEND_URL+"/api/recipes/favorites/${id}", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setFavorites(favorites.filter(f => f.id !== id));

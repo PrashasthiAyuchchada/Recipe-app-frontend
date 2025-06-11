@@ -32,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/recipes/favorites', {
+        const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/api/recipes/favorites", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setFavorites(res.data.map(f => f.id));
@@ -49,13 +49,13 @@ const Home = () => {
 
     try {
       if (isFav) {
-        await axios.delete(`http://localhost:5000/api/recipes/favorites/${recipe.id}`, {
+        await axios.delete(import.meta.env.VITE_BACKEND_URL+"/api/recipes/favorites/${recipe.id}", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setFavorites(favorites.filter(f => f !== recipe.id));
       } else {
         await axios.post(
-          'http://localhost:5000/api/recipes/favorites',
+          import.meta.env.VITE_BACKEND_URL+"/api/recipes/favorites",
           {
             idMeal: recipe.id,
             strMeal: recipe.name,
