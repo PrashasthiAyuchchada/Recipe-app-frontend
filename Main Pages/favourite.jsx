@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import RecipeModal from '../Components/recipeModel';
 import RecipeCard from '../components/RecipeCard';
-
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [modalRecipe, setModalRecipe] = useState(null);
+  const token = localStorage.getItem('token');
 
-  const handleRemove = (id) => {
-    setFavorites(prev => prev.filter(f => f !== id));
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/recipes/favorites', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setFavorites(res.data);
+      } catch (err) {
+        console.error('Failed to load favorites:', err);
+      }
+    };
+    if (token) fetchFavorites();
+  }, [token]);
+
+  const handleRemove = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/recipes/favorites/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setFavorites(favorites.filter(f => f.id !== id));
+    } catch (err) {
+      console.error('Failed to remove favorite:', err);
+    }
   };
 
   return (
@@ -21,8 +42,8 @@ const Favorites = () => {
             key={recipe.id}
             recipe={recipe}
             isFavorite={true}
-            onFavoriteToggle={handleRemove}
-            onOpen={setModalRecipe}
+            onFavoriteToggle={() => handleRemove(recipe.id)}
+            onOpen={() => setModalRecipe(recipe)}
           />
         ))}
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+ import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -17,15 +18,33 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError('The password does not match');
-      return;
+ 
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (formData.password !== formData.confirmPassword) {
+    setError('The password does not match');
+    return;
+  }
+
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/register', {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      password: formData.password,
+    });
+
+    if (response.status === 201) {
+      navigate('/login');
     }
-    // Replace with API call
-    navigate('/login');
-  };
+  } catch (err) {
+    const message = err.response?.data?.message || 'Registration failed';
+    setError(message);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

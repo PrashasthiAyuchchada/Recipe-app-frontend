@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -9,11 +11,20 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Replace with real login API
-    if (email === 'john@gmail.com' && password === 'password') {
-      navigate('/dashboard');
-    } else {
-      setError('Your password or username is incorrect');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      // Save token and navigate to dashboard
+      localStorage.setItem('token', response.data.token);
+      setIsAuthenticated(true);
+      navigate('/home');
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed';
+      setError(message);
     }
   };
 
