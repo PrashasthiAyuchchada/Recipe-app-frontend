@@ -15,7 +15,7 @@ const RecipeModal = ({ recipe, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-300 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded w-full h-[800px]  max-w-lg relative">
+      <div className="bg-white p-6 rounded w-full h-[700px]  max-w-lg relative">
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-500">✕</button>
         <img src={details.strMealThumb} alt={details.strMeal} className="w-full h-60 object-cover rounded mb-4" />
         <h2 className="text-xl font-bold mb-2">{details.strMeal}</h2>
